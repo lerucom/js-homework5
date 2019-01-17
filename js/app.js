@@ -8,7 +8,8 @@ const purchaseQuantityEl = document.getElementById('purchases-quantity');
 const totalCostEl = document.getElementById('total-cost');
 
 goodsAddBtnEl.addEventListener('click', function () {
-        let purchase = {
+    if ((goodsNameEl.value.trim() !== '') && (goodsPriceEl.value > 0)) {
+        const purchase = {
             name: goodsNameEl.value,
             price: goodsPriceEl.value
         };
@@ -19,4 +20,6 @@ goodsAddBtnEl.addEventListener('click', function () {
         goodsNameEl.value = "";
         goodsPriceEl.value = "";
     }
-);
+    goodsNameEl.value = "";
+    goodsPriceEl.value = "";
+});
