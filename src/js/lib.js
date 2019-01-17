@@ -16,7 +16,7 @@ export const cart = {
                 purchasePrice = parseFloat(item.price);
             }
         }
-        return purchaseName + ", стоимость: " + purchasePrice.toFixed(2);
+        return purchaseName + " = " + purchasePrice.toFixed(2);
     }
 
 };
