@@ -1,2 +1,2 @@
 [![Build Status](https://travis-ci.com/lerucom/js-homework5.svg?branch=master)](https://travis-ci.com/lerucom/js-homework5) [![codecov](https://codecov.io/gh/lerucom/js-homework5/branch/master/graph/badge.svg)](https://codecov.io/gh/lerucom/js-homework5)
-# ДЗ №5 - Калькулятор затрат
+# ДЗ №5 - [Калькулятор затрат](https://lerucom.github.io/js-homework5/)
