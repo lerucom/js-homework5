@@ -7,11 +7,17 @@ export class Purchase {
 
 export class PurchaseList {
     constructor() {
-        this.items = [];
+        const savedItems = JSON.parse(localStorage.getItem('tasks'));
+        if (savedItems !== null) {
+            this.items = savedItems;
+        } else {
+            this.items = [];
+        }
     }
 
     add(item) {
         this.items.push(item);
+        this.save();
     }
 
     remove(item) {
@@ -19,6 +25,7 @@ export class PurchaseList {
         if (index !== -1) {
             this.items.splice(index, 1);
         }
+        this.save();
 
     }
 
@@ -27,6 +34,8 @@ export class PurchaseList {
         for (const item of this.items) {
             result += parseFloat(item.price);
         }
+
+        this.save();
         return result.toFixed(2);
     }
 
@@ -39,9 +48,15 @@ export class PurchaseList {
                 purchasePrice = parseFloat(item.price);
             }
         }
+
+        this.save();
         return {
             purchaseName: purchaseName,
             purchasePrice: purchasePrice.toFixed(2)
         };
+    }
+
+    save() {
+        localStorage.setItem('tasks', JSON.stringify(this.items))
     }
 }

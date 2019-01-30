@@ -11,7 +11,11 @@ const listEl = document.getElementById('purchases-list');
 
 const purchaseList = new PurchaseList();
 
-goodsAddBtnEl.addEventListener('click', function () {
+rebuildTree(listEl, purchaseList);
+
+goodsAddBtnEl.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    validate(this.form);
     if ((goodsNameEl.value.trim() !== '') && (goodsPriceEl.value > 0)) {
 
         const purchase = new Purchase(goodsNameEl.value, goodsPriceEl.value);
@@ -21,13 +25,30 @@ goodsAddBtnEl.addEventListener('click', function () {
         goodsPriceEl.value = "";
 
         rebuildTree(listEl, purchaseList);
-
-    } else {
-        goodsNameEl.value = "";
-        goodsPriceEl.value = "";
-        alert('Повторите попытку (Наименование покупки - не пустая строка, а стоимость - больше 0)');
     }
 });
+
+function validate(form) {
+    const elems = form.elements;
+
+    resetError(elems.goodsname.parentNode);
+    if (!elems.goodsname.value) {
+        showError(elems.goodsname.parentNode);
+    }
+
+    resetError(elems.goodsprice.parentNode);
+    if (!elems.goodsprice.value) {
+        showError(elems.goodsprice.parentNode);
+    }
+}
+
+function resetError(container) {
+    container.classList.remove('error');
+}
+
+function showError(container) {
+    container.classList.add('error');
+}
 
 function rebuildTree(container, list) {
     container.innerHTML = '';
@@ -43,7 +64,7 @@ function rebuildTree(container, list) {
 
         liEl.innerHTML = `
         <span data-id="text">${item.name}, ${item.price} \u20BD</span>        
-        <button data-id="remove" class = "btn btn-danger btn-sm float-right">Remove</button>
+        <button data-id="remove" class = "btn btn-danger btn-sm float-right">&times;</button>
         `;
 
         const removeEl = liEl.querySelector('[data-id=remove]');
